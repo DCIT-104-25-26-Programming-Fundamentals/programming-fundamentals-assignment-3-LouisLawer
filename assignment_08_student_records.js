@@ -84,4 +84,124 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+// ---------------------------------------------------------------------
+// Helper — Calculate Average
+// ---------------------------------------------------------------------
 
+function calculateAverage(scores) {
+    if (scores.length === 0) {
+        return 0;
+    }
+
+    let sum = 0;
+    for (let i = 0; i < scores.length; i++) {
+        sum += scores[i];
+    }
+
+    return sum / scores.length;
+}
+
+// ---------------------------------------------------------------------
+// Feature 1 — Add a Student
+// ---------------------------------------------------------------------
+
+function addStudent(students) {
+    const name = readlineSync.question("Student name: ");
+    const id = readlineSync.questionInt("Student ID: ");
+
+    const numScores = readlineSync.questionInt("How many scores? ");
+
+    if (numScores <= 0) {
+        console.log("Error: number of scores must be a positive integer.");
+        return;
+    }
+
+    const scores = [];
+    for (let i = 1; i <= numScores; i++) {
+        const score = readlineSync.questionFloat(`Enter score ${i}: `);
+        scores.push(score);
+    }
+
+    const student = { name: name, id: id, scores: scores };
+    students.push(student);
+
+    console.log(`Student "${name}" added successfully.`);
+}
+
+// ---------------------------------------------------------------------
+// Feature 2 — Display All Students
+// ---------------------------------------------------------------------
+
+function displayAllStudents(students) {
+    if (students.length === 0) {
+        console.log("No students have been added yet.");
+        return;
+    }
+
+    console.log("Name            ID              Scores              Average");
+    console.log("------------------------------------------------------------");
+
+    for (const student of students) {
+        const scoresStr = student.scores.join(", ");
+        const average = calculateAverage(student.scores).toFixed(2);
+
+        console.log(
+            `${student.name.padEnd(16)}${String(student.id).padEnd(16)}${scoresStr.padEnd(20)}${average}`
+        );
+    }
+}
+
+// ---------------------------------------------------------------------
+// Feature 3 — Calculate Average Score for a Specific Student
+// ---------------------------------------------------------------------
+
+function calculateAverageForId(students) {
+    const id = readlineSync.questionInt("Enter student ID: ");
+
+    for (const student of students) {
+        if (student.id === id) {
+            const average = calculateAverage(student.scores).toFixed(2);
+            console.log(`${student.name}'s average score: ${average}`);
+            return;
+        }
+    }
+
+    console.log(`Error: no student found with ID ${id}.`);
+}
+
+// ---------------------------------------------------------------------
+// MAIN
+// ---------------------------------------------------------------------
+
+function main() {
+    const students = [];
+
+    while (true) {
+        console.log();
+        console.log("==============================");
+        console.log("  STUDENT RECORD SYSTEM MENU");
+        console.log("==============================");
+        console.log("1. Add student");
+        console.log("2. Display all students");
+        console.log("3. Calculate average score");
+        console.log("4. Quit");
+
+        const choice = readlineSync.questionInt("Enter your choice (1-4): ");
+        console.log();
+
+        if (choice === 1) {
+            addStudent(students);
+        } else if (choice === 2) {
+            displayAllStudents(students);
+        } else if (choice === 3) {
+            calculateAverageForId(students);
+        } else if (choice === 4) {
+            console.log("Goodbye!");
+            break;
+        } else {
+            console.log("Error: please enter a number from 1 to 4.");
+        }
+    }
+}
+
+main();

@@ -81,4 +81,88 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+// ---------------------------------------------------------------------
+// Feature 1 — Add a Task
+// ---------------------------------------------------------------------
 
+function addTask(tasks) {
+    const description = readlineSync.question("Enter task: ");
+    tasks.push(description);
+    console.log(`Task added: "${description}"`);
+}
+
+// ---------------------------------------------------------------------
+// Feature 2 — View All Tasks
+// ---------------------------------------------------------------------
+
+function viewTasks(tasks) {
+    if (tasks.length === 0) {
+        console.log("Your list is empty. Add a task to get started!");
+        return;
+    }
+
+    console.log("Your Tasks:");
+    for (let i = 0; i < tasks.length; i++) {
+        console.log(`${i + 1}. ${tasks[i]}`);
+    }
+}
+
+// ---------------------------------------------------------------------
+// Feature 3 — Delete a Task
+// ---------------------------------------------------------------------
+
+function deleteTask(tasks) {
+    if (tasks.length === 0) {
+        console.log("Your list is empty. Nothing to delete.");
+        return;
+    }
+
+    viewTasks(tasks);
+    const taskNum = readlineSync.questionInt("Enter task number to delete: ");
+
+    if (taskNum < 1 || taskNum > tasks.length) {
+        console.log("Error: that task number doesn't exist.");
+        return;
+    }
+
+    const removed = tasks[taskNum - 1];
+    tasks.splice(taskNum - 1, 1);
+    console.log(`Task "${removed}" has been removed.`);
+}
+
+// ---------------------------------------------------------------------
+// MAIN
+// ---------------------------------------------------------------------
+
+function main() {
+    const tasks = [];
+
+    while (true) {
+        console.log();
+        console.log("=========================");
+        console.log("     TO-DO LIST MENU");
+        console.log("=========================");
+        console.log("1. Add task");
+        console.log("2. View tasks");
+        console.log("3. Delete task");
+        console.log("4. Quit");
+
+        const choice = readlineSync.questionInt("Enter your choice (1-4): ");
+        console.log();
+
+        if (choice === 1) {
+            addTask(tasks);
+        } else if (choice === 2) {
+            viewTasks(tasks);
+        } else if (choice === 3) {
+            deleteTask(tasks);
+        } else if (choice === 4) {
+            console.log("Goodbye!");
+            break;
+        } else {
+            console.log("Error: please enter a number from 1 to 4.");
+        }
+    }
+}
+
+main();

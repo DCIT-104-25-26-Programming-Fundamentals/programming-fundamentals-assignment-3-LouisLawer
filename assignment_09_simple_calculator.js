@@ -74,4 +74,98 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+// ---------------------------------------------------------------------
+// Operation functions
+// ---------------------------------------------------------------------
 
+function add(a, b) {
+    return a + b;
+}
+
+function subtract(a, b) {
+    return a - b;
+}
+
+function multiply(a, b) {
+    return a * b;
+}
+
+function divide(a, b) {
+    if (b === 0) {
+        return null;
+    }
+    return a / b;
+}
+
+function modulus(a, b) {
+    if (b === 0) {
+        return null;
+    }
+    return a % b;
+}
+
+function exponentiate(a, b) {
+    return a ** b;
+}
+
+// ---------------------------------------------------------------------
+// MAIN
+// ---------------------------------------------------------------------
+
+function main() {
+    while (true) {
+        console.log();
+        console.log("=========================");
+        console.log("     SIMPLE CALCULATOR");
+        console.log("=========================");
+        console.log("1. Addition");
+        console.log("2. Subtraction");
+        console.log("3. Multiplication");
+        console.log("4. Division");
+        console.log("5. Modulus");
+        console.log("6. Exponentiation");
+        console.log("7. Quit");
+
+        const choice = readlineSync.questionInt("Select an operation (1-7): ");
+        console.log();
+
+        if (choice === 7) {
+            console.log("Goodbye!");
+            break;
+        }
+
+        if (choice < 1 || choice > 6) {
+            console.log("Error: please enter a number from 1 to 7.");
+            continue;
+        }
+
+        const a = readlineSync.questionFloat("Enter first number : ");
+        const b = readlineSync.questionFloat("Enter second number: ");
+
+        if (choice === 1) {
+            console.log(`Result: ${a} + ${b} = ${add(a, b)}`);
+        } else if (choice === 2) {
+            console.log(`Result: ${a} - ${b} = ${subtract(a, b)}`);
+        } else if (choice === 3) {
+            console.log(`Result: ${a} * ${b} = ${multiply(a, b)}`);
+        } else if (choice === 4) {
+            const result = divide(a, b);
+            if (result === null) {
+                console.log("Error: Cannot divide by zero.");
+            } else {
+                console.log(`Result: ${a} / ${b} = ${result.toFixed(2)}`);
+            }
+        } else if (choice === 5) {
+            const result = modulus(a, b);
+            if (result === null) {
+                console.log("Error: Cannot divide by zero.");
+            } else {
+                console.log(`Result: ${a} % ${b} = ${result}  (remainder)`);
+            }
+        } else if (choice === 6) {
+            console.log(`Result: ${a} ** ${b} = ${exponentiate(a, b)}`);
+        }
+    }
+}
+
+main();

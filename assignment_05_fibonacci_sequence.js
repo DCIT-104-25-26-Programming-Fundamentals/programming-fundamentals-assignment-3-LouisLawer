@@ -54,4 +54,66 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+// ---------------------------------------------------------------------
+// PART A — Print the First N Terms
+// ---------------------------------------------------------------------
 
+function printFibonacciTerms(n) {
+    if (n <= 0) {
+        console.log("Error: N must be a positive integer.");
+        return;
+    }
+
+    let a = 0, b = 1;
+    const terms = [];
+
+    for (let i = 0; i < n; i++) {
+        terms.push(a);
+        const next = a + b;
+        a = b;
+        b = next;
+    }
+
+    console.log("Fibonacci sequence: " + terms.join(" "));
+}
+
+// ---------------------------------------------------------------------
+// PART B — Check if a Number Belongs to the Sequence
+// ---------------------------------------------------------------------
+
+function isFibonacciNumber(number) {
+    if (number < 0) {
+        return false;
+    }
+
+    let a = 0, b = 1;
+
+    while (a < number) {
+        const next = a + b;
+        a = b;
+        b = next;
+    }
+
+    return a === number;
+}
+
+// ---------------------------------------------------------------------
+// MAIN
+// ---------------------------------------------------------------------
+
+function main() {
+    // ---- PART A ----
+    const n = readlineSync.questionInt("How many terms? ");
+    printFibonacciTerms(n);
+
+    // ---- PART B ----
+    const num = readlineSync.questionInt("\nEnter a number to check: ");
+
+    if (isFibonacciNumber(num)) {
+        console.log(`${num} is a Fibonacci number.`);
+    } else {
+        console.log(`${num} is NOT a Fibonacci number.`);
+    }
+}
+
+main();

@@ -43,4 +43,80 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+// ---------------------------------------------------------------------
+// calculateSum — adds up all numbers using a manual loop
+// ---------------------------------------------------------------------
 
+function calculateSum(numbers) {
+    let sum = 0;
+    for (let i = 0; i < numbers.length; i++) {
+        sum += numbers[i];
+    }
+    return sum;
+}
+
+// ---------------------------------------------------------------------
+// calculateAverage — reuses calculateSum, divides by count
+// ---------------------------------------------------------------------
+
+function calculateAverage(numbers) {
+    return calculateSum(numbers) / numbers.length;
+}
+
+// ---------------------------------------------------------------------
+// findMax — finds the largest number using a manual loop
+// ---------------------------------------------------------------------
+
+function findMax(numbers) {
+    let max = numbers[0];
+    for (let i = 1; i < numbers.length; i++) {
+        if (numbers[i] > max) {
+            max = numbers[i];
+        }
+    }
+    return max;
+}
+
+// ---------------------------------------------------------------------
+// findMin — finds the smallest number using a manual loop
+// ---------------------------------------------------------------------
+
+function findMin(numbers) {
+    let min = numbers[0];
+    for (let i = 1; i < numbers.length; i++) {
+        if (numbers[i] < min) {
+            min = numbers[i];
+        }
+    }
+    return min;
+}
+
+// ---------------------------------------------------------------------
+// MAIN
+// ---------------------------------------------------------------------
+
+function main() {
+    const readlineSync = require("readline-sync");
+
+    const count = readlineSync.questionInt("How many numbers? ");
+
+    if (count <= 0) {
+        console.log("Error: please enter a positive number of values.");
+        return;
+    }
+
+    const numbers = [];
+    for (let i = 1; i <= count; i++) {
+        const num = readlineSync.questionInt(`Enter number ${i}: `);
+        numbers.push(num);
+    }
+
+    console.log();
+    console.log("Results:");
+    console.log(`Sum:     ${calculateSum(numbers)}`);
+    console.log(`Average: ${calculateAverage(numbers)}`);
+    console.log(`Maximum: ${findMax(numbers)}`);
+    console.log(`Minimum: ${findMin(numbers)}`);
+}
+
+main();

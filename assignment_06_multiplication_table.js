@@ -59,4 +59,50 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+// ---------------------------------------------------------------------
+// PART A — Single Table
+// ---------------------------------------------------------------------
 
+function printTable(number) {
+    console.log(`Multiplication Table for ${number}:`);
+    for (let i = 1; i <= 12; i++) {
+        console.log(`${number} x ${i} = ${number * i}`);
+    }
+}
+
+// ---------------------------------------------------------------------
+// PART B — Bonus: Tables from 1 to N
+// ---------------------------------------------------------------------
+
+function printTablesUpTo(n) {
+    for (let number = 1; number <= n; number++) {
+        printTable(number);
+        if (number !== n) {
+            console.log("---");
+        }
+    }
+}
+
+// ---------------------------------------------------------------------
+// MAIN
+// ---------------------------------------------------------------------
+
+function main() {
+    // ---- PART A ----
+    const number = readlineSync.questionInt("Enter a number: ");
+    printTable(number);
+
+    console.log();
+
+    // ---- PART B (Bonus) ----
+    const n = readlineSync.questionInt("Enter a number N: ");
+
+    if (n <= 0) {
+        console.log("Error: N must be a positive integer.");
+        return;
+    }
+
+    printTablesUpTo(n);
+}
+
+main();
